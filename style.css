@@ -97,6 +97,16 @@ button[disabled] {
   float: right;
 }
 
+#criteria{
+  position:fixed;
+  flex-direction: column;
+  top: 60%;
+  left: 35%;
+  z-index: 1;
+  align-items: center;
+  background-color: aliceblue;
+}
+
 #password {
   -webkit-appearance: none;
   -moz-appearance: none;
