@@ -9,6 +9,10 @@ const LowerCaseLetters = "abcdefghijklmnopqrstuvwxyz";
 const UpperCaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const Numbers = "0123456789"
 const SpecialCharacters = String.raw ` !"#$%&'()*+,-./:;<=>?@[\]^_{|}~`+'`';
+
+function criteriaShow(){
+  criteria.style.display="flex";
+}
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
@@ -16,7 +20,8 @@ function writePassword() {
 
   passwordText.value = password;
 
+  criteria.style.display="none";
 }
 
 // Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
+generateBtn.addEventListener("click", criteriaShow);
