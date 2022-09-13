@@ -1,8 +1,8 @@
 // Assignment Code
-var generateBtn = document.querySelector("#generate");
-var okBtn = document.querySelector("#ok");
-var criteria = document.querySelector("#criteria")
-criteria.style.display="none";
+var generateBtn = document.querySelector("#generate");  //generate button
+var okBtn = document.querySelector("#ok");  //ok button
+var criteria = document.querySelector("#criteria")    //criteria form
+criteria.style.display="none";  //initialize criteria form to be unseened
 
 const LowerCaseLetters = "abcdefghijklmnopqrstuvwxyz";
 const UpperCaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
