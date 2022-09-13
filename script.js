@@ -4,6 +4,7 @@ var okBtn = document.querySelector("#ok");  //ok button
 var criteria = document.querySelector("#criteria")    //criteria form
 criteria.style.display="none";  //initialize criteria form to be unseened
 
+//char sets for password
 const LowerCaseLetters = "abcdefghijklmnopqrstuvwxyz";
 const UpperCaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const Numbers = "0123456789"
