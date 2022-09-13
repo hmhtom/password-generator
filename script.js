@@ -10,6 +10,7 @@ const UpperCaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const Numbers = "0123456789"
 const SpecialCharacters = String.raw ` !"#$%&'()*+,-./:;<=>?@[\]^_{|}~`+'`';
 
+//show criteria form
 function criteriaShow(){
   criteria.style.display="flex";
 }
@@ -47,9 +48,11 @@ function writePassword() {
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
-
+  //Hide form once password generated
   criteria.style.display="none";
 }
 
+
 // Add event listener to generate button
 generateBtn.addEventListener("click", criteriaShow);
+okBtn.addEventListener("click",writePassword);
