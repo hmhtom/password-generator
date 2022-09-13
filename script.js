@@ -22,6 +22,9 @@ function generatePassword() {
   let uppercaseletter = document.getElementById("uppercase").checked;
   let numbers = document.getElementById("numbers").checked;
   let special = document.getElementById("special").checked;
+  //restrict length between 8-128
+  if (length>128){length=128;}
+  else if(length<8){length=8;}
   //Initializing char_set to choose from and password to be generated
   let char_set = "";
   let password = "";
