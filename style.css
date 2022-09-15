@@ -96,15 +96,15 @@ button[disabled] {
 .float-right {
   float: right;
 }
-
+/*Criteria Box styling*/
 #criteria{
   position:fixed;
   flex-direction: column;
-  top: 60%;
+  border-radius: 20px;
+  top: 25%;
   left: 35%;
-  z-index: 1;
-  align-items: center;
-  background-color: aliceblue;
+  text-align: center;
+  background-color: lightskyblue;
 }
 
 #password {
