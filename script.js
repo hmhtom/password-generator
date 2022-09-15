@@ -53,10 +53,15 @@ function writePassword() {
 
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
-
-  passwordText.value = password;
-  //Hide form once password generated
-  criteria.style.display="none";
+  //Check if criteria is valid
+  if(password === ""){
+    window.alert("Please enter length and select at least one criteria.")
+  }else{
+    passwordText.value = password;
+    //Hide form once password generated
+    criteria.style.display="none";
+  }
+  
 }
 
 
