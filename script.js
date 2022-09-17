@@ -1,70 +1,95 @@
 // Assignment Code
 let generateBtn = document.querySelector("#generate");  //generate button
-let okBtn = document.querySelector("#ok");  //ok button
-let criteria = document.querySelector("#criteria");    //criteria form
-let length = document.getElementById("length");  //Password length
-let lowercaseletter = document.getElementById("lowercase");  //Lowercase checkbox
-let uppercaseletter = document.getElementById("uppercase");  //Uppercase checkbox
-let numbers = document.getElementById("numbers");  //Number checkbox
-let special = document.getElementById("special");  //Special Char checkbox
+let lowercase_check;  //Lowercase checkbox
+let uppercase_check;   //Uppercase checkbox
+let numbers_check;  //Number checkbox
+let special_check;   //Special Char checkbox
 //char sets for password
 const LowerCaseLetters = "abcdefghijklmnopqrstuvwxyz";
 const UpperCaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-const Numbers = "0123456789"
-const SpecialCharacters = String.raw ` !"#$%&'()*+,-./:;<=>?@[\]^_{|}~`+'`';
+const Numbers = "0123456789";
+const SpecialCharacters = String.raw `!"#$%&'()*+,-./:;<=>?@[\]^_{|}~`+'`';
 
-//initialize criteria form to be unseened
-criteria.style.display="none";
-
-//show criteria form
-function criteriaShow() {
-  criteria.style.display="flex";
-}
-//Password Generator
-function generatePassword() {
-  //Initializing char_set to choose from and password to be generated
+//Generate charset for password
+function generateCharset(){
+  // Initialization 
   let char_set = "";
+  lowercase_check = false;
+  uppercase_check = false;
+  numbers_check = false;
+  special_check = false;
+
+  
+  //Base on confirmation append the correct set to char_set
+  if(confirm("Incude lowercase?")){
+    char_set += LowerCaseLetters;
+    lowercase_check = true;
+  }
+  if(confirm("Incude uppercase?")){
+    char_set += UpperCaseLetters;
+    uppercase_check = true;
+  }
+  if(confirm("Incude numbers?")){
+    char_set += Numbers;
+    numbers_check = true;
+  }
+  if(confirm("Incude special characters?")){
+    char_set += SpecialCharacters;
+    special_check = true;
+  }
+  return char_set;
+}
+
+//promt for password length to makesure length is valid
+function setLength(){
+  let length = prompt("Please choose the password length between 8-128.");
+  
+  while ((length<8||length>128)||/[\D]/.test(length)){
+    if (/[\D]/.test(length)){
+      alert("Invalid Input.")
+    }else if(length<8||length>128){
+      alert("Number has to between 8-128.")
+    }
+    length = prompt("Please choose the password length between 8-128.");
+  }
+  return Number(length);
+}
+
+//Given a set of charset and length for final password and return a randomize password
+function random(char_set, length){
   let password = "";
 
-  //restrict length between 8-128
-  if (length>128){length=128;}
-  else if(length<8){length=8;}
-
-  //Adding sets of char into char_set base on the checkbox value
-  if(lowercaseletter.checked){char_set += LowerCaseLetters;}
-  if(uppercaseletter.checked){char_set += UpperCaseLetters;}
-  if(numbers.checked){char_set += Numbers;}
-  if(special.checked){char_set += SpecialCharacters;}
-
-  //Loop over the length of password
-  for(let i = 0; i < length.value;i++){
-    let ranindex = getRandint(0, char_set.length-1);  //Getting a random index pointer for char_set
+  for(let i = 0; i < length; i++){
+    let ranindex = Math.floor(Math.random()*char_set.length);  //Getting a random index pointer for char_set
     password += char_set.charAt(ranindex);  //Apending char of random index to password
   }
+
   return password;
 }
 
-//Get a random integer from min to max
-function getRandint(min, max) {
-  return Math.floor(Math.random()*(max - min))+min;
+//Generating Password
+function generatePassword() {
+  //Initializing the password
+  let length = setLength();
+  let char_set = generateCharset();
+
+  //Keep looping until at least one set if choose
+  while (char_set == ""){
+    alert("Please choose at least one criteria.")
+    char_set = generateCharset();
+  }
+
+  return random(char_set, length);
 }
+
 // Write password to the #password input
 function writePassword() {
 
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
-  //Check if criteria is valid
-  if(password === ""){
-    window.alert("Please enter length and select at least one criteria.")
-  }else{
-    passwordText.value = password;
-    //Hide form once password generated
-    criteria.style.display="none";
-  }
-  
+
+  passwordText.value = password;
 }
 
-
 // Add event listener to generate button
-generateBtn.addEventListener("click", criteriaShow);
-okBtn.addEventListener("click",writePassword);
+generateBtn.addEventListener("click", writePassword);
