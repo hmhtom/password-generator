@@ -93,3 +93,64 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
+
+//Password Generator Plugin (At least one each type selected)
+//On Ln 82 replace random with randomAtLeastOne
+function randomAtLeastOne(char_set, length){
+let password = "";
+let char_list = [];
+let regex_list = [];
+
+//append choice to both list
+if (lowercase_check) {
+  char_list.push(LowerCaseLetters);
+  regex_list.push(/[a-z]/);
+}
+if (uppercase_check) {
+  char_list.push(UpperCaseLetters);
+  regex_list.push(/[A-Z]/);
+}
+if (numbers_check) {
+  char_list.push(Numbers);
+  regex_list.push(/[0-9]/);
+}
+if (special_check) {
+  char_list.push(SpecialCharacters);
+  regex_list.push(/[^a-zA-Z0-9]/);
+}
+
+//loop that takes as much available spaces as possible
+let available = length;
+while (available !== 0){
+  //Regex checking and sync char_list with regex
+  for (let y = 0, i = 0; i < char_list.length; i++){
+    if(regex_list[y].test(password)){
+      regex_list.splice(y, 1);
+      char_list.splice(y,1)
+    }else{
+      y++;
+    }
+  }
+  available = length- password.length - char_list.length
+
+  for(i=0; i<available;i++){
+    password += char_set.charAt(Math.floor(Math.random()*char_set.length));
+  }
+}
+
+//random insert action at the end
+while(char_list.length !== 0){
+  randomInsert(password, char_list[0].charAt(Math.floor(Math.random()*char_set.length)));
+  char_list.shift()
+}
+
+return password;
+}
+
+function randomInsert(string, character){
+let i = Math.floor(Math.random() * string.length)
+let left = string.slice(0, i);
+let right = string.slice(i+1);
+
+string = left + character + right;
+}
